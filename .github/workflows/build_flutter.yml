@@ -7,7 +7,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-
 jobs:
   build:
     name: Build Flutter App
@@ -24,10 +23,14 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      - name: Set up Flutter (beta channel)
-        uses: subosito/flutter-action@v2
+      - name: Set up Flutter (beta 3.38.0-0.2.pre)
+        uses: flutter-actions/setup-flutter@v2
         with:
-          channel: 'beta' # أو 'master' لو تحتاج أحدث Dart
+          flutter-version: '3.38.0-0.2.pre'
+          channel: 'beta'
+
+      - name: Check Gradle version
+        run: ./gradlew --version
 
       - name: Install dependencies
         run: flutter pub get
