@@ -57,11 +57,6 @@ jobs:
     - name: Get Flutter Dependencies
       run: flutter pub get
       
-    - name: Verify Gradle Wrapper
-      run: |
-        chmod +x android/gradlew
-        android/gradlew --version
-        
     - name: Clean Flutter Build
       run: flutter clean
       
