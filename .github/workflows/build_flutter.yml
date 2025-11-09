@@ -35,7 +35,7 @@ jobs:
       with:
         path: |
           ~/.pub-cache
-          ${{ github.workspace }}/flutter_app/.dart_tool
+          .dart_tool
         key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
         restore-keys: |
           ${{ runner.os }}-flutter-
@@ -46,7 +46,7 @@ jobs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-          flutter_app/android/.gradle
+          android/.gradle
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
@@ -55,55 +55,49 @@ jobs:
       run: flutter doctor -v
       
     - name: Get Flutter Dependencies
-      working-directory: flutter_app
       run: flutter pub get
       
     - name: Verify Gradle Wrapper
-      working-directory: flutter_app/android
       run: |
-        chmod +x gradlew
-        ./gradlew --version
+        chmod +x android/gradlew
+        android/gradlew --version
         
     - name: Clean Flutter Build
-      working-directory: flutter_app
       run: flutter clean
       
     - name: Build APK (Debug)
-      working-directory: flutter_app
       run: flutter build apk --debug
       
     - name: Build APK (Release)
-      working-directory: flutter_app
       run: flutter build apk --release
       
     - name: Build App Bundle (Release)
-      working-directory: flutter_app
       run: flutter build appbundle --release
       
     - name: Upload Debug APK
       uses: actions/upload-artifact@v4
       with:
         name: viscend-studio-debug-apk
-        path: flutter_app/build/app/outputs/flutter-apk/app-debug.apk
+        path: build/app/outputs/flutter-apk/app-debug.apk
         retention-days: 7
         
     - name: Upload Release APK
       uses: actions/upload-artifact@v4
       with:
         name: viscend-studio-release-apk
-        path: flutter_app/build/app/outputs/flutter-apk/app-release.apk
+        path: build/app/outputs/flutter-apk/app-release.apk
         retention-days: 30
         
     - name: Upload App Bundle
       uses: actions/upload-artifact@v4
       with:
         name: viscend-studio-app-bundle
-        path: flutter_app/build/app/outputs/bundle/release/app-release.aab
+        path: build/app/outputs/bundle/release/app-release.aab
         retention-days: 30
         
     - name: Display Build Info
       run: |
         echo "✅ Build completed successfully!"
-        echo "📱 APK Size (Debug): $(du -h flutter_app/build/app/outputs/flutter-apk/app-debug.apk | cut -f1)"
-        echo "📱 APK Size (Release): $(du -h flutter_app/build/app/outputs/flutter-apk/app-release.apk | cut -f1)"
-        echo "📦 Bundle Size: $(du -h flutter_app/build/app/outputs/bundle/release/app-release.aab | cut -f1)"
+        echo "📱 APK Size (Debug): $(du -h build/app/outputs/flutter-apk/app-debug.apk | cut -f1)"
+        echo "📱 APK Size (Release): $(du -h build/app/outputs/flutter-apk/app-release.apk | cut -f1)"
+        echo "📦 Bundle Size: $(du -h build/app/outputs/bundle/release/app-release.aab | cut -f1)"
