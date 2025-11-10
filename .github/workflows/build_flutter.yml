@@ -76,8 +76,12 @@ jobs:
     - name: Upgrade packages
       run: flutter pub upgrade
 
-    - name: Run Gradle with warnings
-      run: chmod +x gradlew && ./gradlew assembleDebug --warning-mode all
+    - name: Run Gradle from android/
+      working-directory: android
+      run: |
+        chmod +x ../gradlew
+        ../gradlew assembleDebug --warning-mode all
+
 
 
     - name: Build APK (Debug)
