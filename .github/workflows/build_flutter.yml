@@ -59,6 +59,17 @@ jobs:
       
     - name: Clean Flutter Build
       run: flutter clean
+
+    - name: Patch font_awesome_flutter to fix withValues error
+      run: |
+          FILE="$HOME/.pub-cache/hosted/pub.dev/font_awesome_flutter-10.9.0/lib/src/fa_icon.dart"
+          if [ -f "$FILE" ]; then
+            sed -i 's/withValues(alpha: iconColor.a \* iconOpacity)/withOpacity(iconColor.opacity * iconOpacity)/' "$FILE"
+          else
+            echo "fa_icon.dart not found, skipping patch"
+          fi
+
+
       
     - name: Build APK (Debug)
       run: flutter build apk --debug
