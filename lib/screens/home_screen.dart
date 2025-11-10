@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Text(
                       t['heroSubtitle'],
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.9),
+                            color: Colors.white.withOpacity(0.9),
                           ),
                       textAlign: TextAlign.center,
                     ),
@@ -358,7 +358,7 @@ class _ServiceCard extends StatelessWidget {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: color.withValues(alpha: 0.2),
+                color: color.withOpacity(0.2),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: color, size: 30),
@@ -461,7 +461,7 @@ class _StatItem extends StatelessWidget {
         Text(
           label,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white.withValues(alpha: 0.9),
+                color: Colors.white.withOpacity(0.9),
               ),
         ),
       ],
