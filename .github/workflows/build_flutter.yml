@@ -76,6 +76,8 @@ jobs:
     - name: Upgrade packages
       run: flutter pub upgrade
 
+    - name: Run Gradle with warnings
+      run: ./gradlew assembleDebug --warning-mode all
 
     - name: Build APK (Debug)
       run: flutter build apk --debug -v
