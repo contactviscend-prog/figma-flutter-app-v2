@@ -38,8 +38,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   
   # Icons
-  font_awesome_flutter: 
-    path: lib/vendor/font_awesome_flutter
+  font_awesome_flutter: ^10.9.0
 
 
 dev_dependencies:
