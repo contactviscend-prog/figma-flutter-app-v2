@@ -70,7 +70,9 @@ jobs:
           fi
 
 
-      
+    - name: Run Gradle with stacktrace
+      run: ./gradlew assembleDebug --stacktrace
+
     - name: Build APK (Debug)
       run: flutter build apk --debug -v
       
