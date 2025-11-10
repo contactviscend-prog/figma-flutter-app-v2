@@ -31,3 +31,13 @@ tasks.register("clean", Delete) {
 }
 
 
+
+subprojects {
+    gradle.projectsEvaluated { project ->
+        if (project.name.contains('path_provider_android')) {
+            project.android {
+                compileSdkVersion 34
+            }
+        }
+    }
+}
