@@ -95,7 +95,7 @@ class _SplashScreenState extends State<SplashScreen>
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.white.withValues(alpha: 0.3),
+                        color: Colors.white.withOpacity(0.3),
                         blurRadius: 40,
                         spreadRadius: 10,
                       ),
@@ -136,7 +136,7 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Text(
                   'استوديو التميز البصري',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Colors.white.withValues(alpha: 0.9),
+                        color: Colors.white.withOpacity(0.9),
                       ),
                 ),
               ),
