@@ -39,7 +39,7 @@ dependencies:
   
   # Icons
   font_awesome_flutter: 
-    path: lib/vendor/font_awesome_flutter/src/fa_icon.dart
+    path: lib/vendor/font_awesome_flutter
 
 
 dev_dependencies:
