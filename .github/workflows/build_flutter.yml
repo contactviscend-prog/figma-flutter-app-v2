@@ -76,7 +76,6 @@ jobs:
     - name: cleaning 
       run: |
         rm -rf ~/.gradle/caches/
-        flutter clean
         cd android && ./gradlew wrapper --gradle-version=8.6
 
 
