@@ -76,7 +76,7 @@ jobs:
     - name: cleaning 
       run: |
         rm -rf ~/.gradle/caches/
-        cd android && ./gradlew wrapper --gradle-version=8.6
+        # cd android && ./gradlew wrapper --gradle-version=8.6
 
 
     # ✅ الخطوة الجديدة: إصلاح شامل لجميع المشاكل المعروفة
