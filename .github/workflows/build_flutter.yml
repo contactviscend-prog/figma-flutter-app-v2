@@ -61,17 +61,24 @@ jobs:
     - name: Flutter Doctor
       run: flutter doctor -v
 
-    - name: Get Flutter Dependencies
-      run: flutter pub get
-
     - name: Clean Flutter Build
       run: flutter clean
+
+    - name: Get Flutter Dependencies
+      run: flutter pub get
 
     - name: Create local.properties
       run: |
         echo "flutter.sdk=$FLUTTER_HOME" > android/local.properties
         echo "flutter.versionCode=1" >> android/local.properties
         echo "flutter.versionName=1.0.0" >> android/local.properties
+
+    - name: cleaning 
+      run: |
+        rm -rf ~/.gradle/caches/
+        flutter clean
+        cd android && ./gradlew wrapper --gradle-version=8.6
+
 
     # ✅ الخطوة الجديدة: إصلاح شامل لجميع المشاكل المعروفة
     - name: Patch Gradle for OutputFile and legacy calls
