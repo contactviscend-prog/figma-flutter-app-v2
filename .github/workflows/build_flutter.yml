@@ -111,6 +111,10 @@ jobs:
         gradlew assembleDebug --warning-mode all
       # chmod +x ../gradlew
 
+    - name: Fix permissions (optional)
+      run: chmod -R 755 android
+
+
     - name: Build APK (Debug)
       run: flutter build apk --debug
 
