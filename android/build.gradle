@@ -23,18 +23,14 @@ subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
 
 
 
-subprojects {
-    gradle.projectsEvaluated { project ->
-        if (project.name.contains('path_provider_android')) {
-            project.android {
-                compileSdkVersion 34
-            }
-        }
-    }
-}
