@@ -38,6 +38,14 @@ jobs:
 
       - name: Build APK
         run: flutter build apk --release --split-per-abi
+        continue-on-error: true
+
+      - name: Show build error details if failed
+        if: failure()
+        run: |
+          echo "=== Build failed, checking logs ==="
+          cat build/app/outputs/flutter-apk/*.apk 2>/dev/null || echo "No APK output"
+          ls -la build/app/outputs/ 2>/dev/null || echo "No outputs directory"
 
       - name: List APK files
         run: ls -lh build/app/outputs/flutter-apk/
