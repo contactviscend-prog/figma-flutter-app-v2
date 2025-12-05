@@ -46,7 +46,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: flutter-apk
-          path: build/app/outputs/flutter-apk/*.apk
+          path: |
+            build/app/outputs/flutter-apk/*.apk
+            build/app/outputs/apk/*.apk
           retention-days: 30
 
       - name: Create release
