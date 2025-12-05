@@ -31,7 +31,11 @@ jobs:
       - name: Clean build artifacts
         run: |
           flutter clean
-          rm -rf android/.gradle android/build app/build build ~/.gradle 2>/dev/null || true
+          rm -rf android/.gradle android/build app/build build ~/.gradle ~/.android 2>/dev/null || true
+
+      - name: Update Android SDK
+        run: |
+          echo "y" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --install "build-tools;33.0.2" || true
 
       - name: Get Flutter dependencies
         run: flutter pub get
