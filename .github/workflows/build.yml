@@ -36,9 +36,8 @@ jobs:
       - name: Get Flutter dependencies
         run: flutter pub get
 
-      - name: Build APK
-        run: flutter build apk --release --split-per-abi
-        continue-on-error: true
+      - name: Build APK Debug
+        run: flutter build apk --debug
 
       - name: Show build error details if failed
         if: failure()
