@@ -24,18 +24,17 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0'
+          flutter-version: '3.13.0'
           channel: 'stable'
           cache: false
 
-      - name: Clean build artifacts
+      - name: Clean build artifacts and cache
         run: |
           flutter clean
           rm -rf android/.gradle android/build app/build build ~/.gradle ~/.android 2>/dev/null || true
 
-      - name: Update Android SDK
-        run: |
-          echo "y" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --install "build-tools;33.0.2" || true
+      - name: Accept Android licenses
+        run: echo "y" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
 
       - name: Get Flutter dependencies
         run: flutter pub get
