@@ -39,15 +39,8 @@ jobs:
       - name: Build APK Debug
         run: flutter build apk --debug
 
-      - name: Show build error details if failed
-        if: failure()
-        run: |
-          echo "=== Build failed, checking logs ==="
-          cat build/app/outputs/flutter-apk/*.apk 2>/dev/null || echo "No APK output"
-          ls -la build/app/outputs/ 2>/dev/null || echo "No outputs directory"
-
       - name: List APK files
-        run: ls -lh build/app/outputs/flutter-apk/
+        run: ls -lh build/app/outputs/flutter-apk/ 2>/dev/null || ls -lh build/app/outputs/apk/
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v3
