@@ -40,8 +40,8 @@ jobs:
       - name: Get Flutter dependencies
         run: flutter pub get
 
-      - name: Build APK Debug
-        run: flutter build apk --debug
+      - name: Build APK Release
+        run: flutter build apk --release
 
       - name: List APK files
         run: ls -lh build/app/outputs/flutter-apk/ 2>/dev/null || ls -lh build/app/outputs/apk/
