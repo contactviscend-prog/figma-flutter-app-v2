@@ -40,8 +40,18 @@ jobs:
       - name: Get Flutter dependencies
         run: flutter pub get
 
-      - name: Build APK Release
-        run: flutter build apk --release
+      - name: Build APK with stacktrace
+        run: flutter build apk --release --verbose 2>&1 | tee build.log || true
+
+      - name: Check if build succeeded
+        run: |
+          if [ -f "build/app/outputs/flutter-apk/app-release.apk" ]; then
+            echo "✅ Build succeeded!"
+          else
+            echo "❌ Build failed - showing full log"
+            cat build.log | tail -200
+            exit 1
+          fi
 
       - name: List APK files
         run: find build/app/outputs -name "*.apk" -type f
