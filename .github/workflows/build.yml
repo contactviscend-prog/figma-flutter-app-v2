@@ -28,10 +28,11 @@ jobs:
           channel: 'stable'
           cache: false
 
-      - name: Clean build artifacts and cache
+      - name: Clean build artifacts and all gradle cache
         run: |
           flutter clean
-          rm -rf android/.gradle android/build app/build build ~/.gradle ~/.android 2>/dev/null || true
+          rm -rf android/.gradle android/build app/build build ~/.gradle ~/.android ~/.gradle/wrapper 2>/dev/null || true
+          rm -rf ~/.gradle/caches 2>/dev/null || true
 
       - name: Accept Android licenses
         run: echo "y" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
