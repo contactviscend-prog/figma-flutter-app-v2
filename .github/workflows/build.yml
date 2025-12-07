@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Flutter APK - Clean Build
 
 on:
   push:
@@ -19,59 +19,25 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          cache: false
 
-      - name: Setup Flutter (LTS version)
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10.6'
+          flutter-version: '3.13.0'
           channel: 'stable'
-          cache: false
 
-      - name: Nuclear clean - remove ALL gradle and flutter cache
+      - name: Complete cache cleanup
         run: |
-          set -e
-          echo "🗑️  Removing all gradle caches..."
-          rm -rf ~/.gradle ~/.android 2>/dev/null || true
-          rm -rf android/.gradle android/build 2>/dev/null || true
-          rm -rf build .dart_tool 2>/dev/null || true
-          flutter clean --verbose
-          echo "✅ All caches removed"
+          flutter clean
+          rm -rf build .dart_tool pubspec.lock
+          rm -rf android/build android/.gradle
+          rm -rf ~/.gradle ~/.android
 
-      - name: Get Flutter dependencies
-        run: flutter pub get --verbose
+      - name: Get fresh dependencies
+        run: flutter pub get
 
-      - name: Build APK (debug mode to avoid OutputFile issues)
-        run: |
-          cd android
-          ./gradlew assembleDebug --no-daemon --no-build-cache -x lint -x lintVital 2>&1 | tee build.log
-          cd ..
+      - name: Generate new pubspec.lock
+        run: flutter pub upgrade
 
-      - name: Check build result
-        run: |
-          if [ -f "build/app/outputs/apk/debug/app-debug.apk" ]; then
-            echo "✅ Build succeeded!"
-            ls -lh build/app/outputs/apk/debug/app-debug.apk
-          else
-            echo "❌ Build failed"
-            tail -100 android/build.log
-            exit 1
-          fi
-
-      - name: List APK files
-        run: find build/app/outputs -name "*.apk" -type f
-
-      - name: Upload APK artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: flutter-release-apk
-          path: build/app/outputs/**/*.apk
-          retention-days: 30
-
-      - name: Create release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v1
-        with:
-          files: build/app/outputs/**/*.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build APK
+        run: flutter build apk --release --verbose
