@@ -21,35 +21,40 @@ jobs:
           java-version: '17'
           cache: false
 
-      - name: Setup Flutter
+      - name: Setup Flutter (LTS version)
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0'
+          flutter-version: '3.10.6'
           channel: 'stable'
           cache: false
 
-      - name: Clean build artifacts and all gradle cache
+      - name: Nuclear clean - remove ALL gradle and flutter cache
         run: |
-          flutter clean
-          rm -rf android/.gradle android/build app/build build ~/.gradle ~/.android ~/.gradle/wrapper 2>/dev/null || true
-          rm -rf ~/.gradle/caches 2>/dev/null || true
-
-      - name: Accept Android licenses
-        run: echo "y" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
+          set -e
+          echo "🗑️  Removing all gradle caches..."
+          rm -rf ~/.gradle ~/.android 2>/dev/null || true
+          rm -rf android/.gradle android/build 2>/dev/null || true
+          rm -rf build .dart_tool 2>/dev/null || true
+          flutter clean --verbose
+          echo "✅ All caches removed"
 
       - name: Get Flutter dependencies
-        run: flutter pub get
+        run: flutter pub get --verbose
 
-      - name: Build APK with stacktrace
-        run: flutter build apk --release --verbose 2>&1 | tee build.log || true
-
-      - name: Check if build succeeded
+      - name: Build APK (debug mode to avoid OutputFile issues)
         run: |
-          if [ -f "build/app/outputs/flutter-apk/app-release.apk" ]; then
+          cd android
+          ./gradlew assembleDebug --no-daemon --no-build-cache -x lint -x lintVital 2>&1 | tee build.log
+          cd ..
+
+      - name: Check build result
+        run: |
+          if [ -f "build/app/outputs/apk/debug/app-debug.apk" ]; then
             echo "✅ Build succeeded!"
+            ls -lh build/app/outputs/apk/debug/app-debug.apk
           else
-            echo "❌ Build failed - showing full log"
-            cat build.log | tail -200
+            echo "❌ Build failed"
+            tail -100 android/build.log
             exit 1
           fi
 
