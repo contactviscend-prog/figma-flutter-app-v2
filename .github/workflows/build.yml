@@ -1,4 +1,4 @@
-name: Build Flutter APK - Clean Build
+name: Build Flutter APK
 
 on:
   push:
@@ -14,30 +14,40 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '11'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.13.0'
-          channel: 'stable'
 
-      - name: Complete cache cleanup
+      - name: Clean previous builds
         run: |
           flutter clean
-          rm -rf build .dart_tool pubspec.lock
-          rm -rf android/build android/.gradle
-          rm -rf ~/.gradle ~/.android
+          rm -rf build pubspec.lock
+          rm -rf android/.gradle android/build
 
-      - name: Get fresh dependencies
+      - name: Get dependencies
         run: flutter pub get
 
-      - name: Generate new pubspec.lock
-        run: flutter pub upgrade
+      - name: Build APK Release
+        run: flutter build apk --release
 
-      - name: Build APK
-        run: flutter build apk --release --verbose
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        if: success()
+        with:
+          name: app-release
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/') && success()
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/app/outputs/flutter-apk/app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
