@@ -114,6 +114,8 @@ jobs:
     - name: Fix permissions (optional)
       run: chmod -R 755 android
 
+    - name: من هو يستخدم الخاصية
+      run: ./gradlew assembleDebug --stacktrace --info
 
     - name: Build APK (Debug)
       run: flutter build apk --debug
