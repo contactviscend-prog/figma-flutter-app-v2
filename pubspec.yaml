@@ -3,6 +3,7 @@ description: تطبيق VisCend Studio - استوديو التميز البصر�
 publish_to: 'none'
 version: 1.0.0+1
 
+e
 environment:
   sdk: '>=3.1.0 <4.0.0'
 
@@ -46,6 +47,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^4.0.0
 
+
 flutter:
   uses-material-design: true
   
@@ -65,5 +67,3 @@ flutter:
         - asset: assets/fonts/Tajawal-Regular.ttf
         - asset: assets/fonts/Tajawal-Bold.ttf
           weight: 700
-
-
