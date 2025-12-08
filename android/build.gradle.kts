@@ -1,4 +1,3 @@
-// Force Gradle to re-evaluate the project structure
 allprojects {
     repositories {
         google()

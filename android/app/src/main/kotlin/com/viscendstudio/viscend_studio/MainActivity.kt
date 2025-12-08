@@ -1,0 +1,5 @@
+package com.viscendstudio.viscend_studio
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()

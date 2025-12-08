@@ -85,6 +85,11 @@ class AppDrawer extends StatelessWidget {
               title: t['contact'],
               route: AppRouter.contact,
             ),
+            _DrawerItem(
+              icon: FontAwesomeIcons.star,
+              title: 'ما يميزنا',
+              route: AppRouter.features,
+            ),
             const Divider(color: AppTheme.textSecondary),
             ListTile(
               leading: Icon(
