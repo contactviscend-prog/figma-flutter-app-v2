@@ -9,36 +9,36 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
   # UI & Design
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.6
-  google_fonts: ^6.1.0
-  flutter_svg: ^2.0.9
-  cached_network_image: ^3.3.0
-  
+  cupertino_icons: ^1.1.0
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.5.0
+  cached_network_image: ^3.4.1
+
   # State Management
-  provider: ^6.1.1
-  
+  provider: ^6.2.1
+
   # Animations
-  animate_do: ^3.1.2
-  lottie: ^3.0.0
+  animate_do: ^3.3.11
+  lottie: ^3.1.2
   shimmer: ^3.0.0
-  
+
   # HTTP & APIs
-  http: ^1.1.2
-  
+  http: ^1.2.2
+
   # Storage
-  shared_preferences: ^2.2.2
-  
+  shared_preferences: ^2.3.2
+
   # Utils
-  intl: any
-  url_launcher: ^6.2.1
-  flutter_dotenv: ^5.1.0
-  
+  intl: ^0.20.1
+  url_launcher: ^6.3.1
+  flutter_dotenv: ^5.2.1
+
   # Icons
-  font_awesome_flutter: ^10.9.0
+  font_awesome_flutter: ^10.10.0
 
 
 dev_dependencies:
@@ -65,5 +65,3 @@ flutter:
         - asset: assets/fonts/Tajawal-Regular.ttf
         - asset: assets/fonts/Tajawal-Bold.ttf
           weight: 700
-
-
