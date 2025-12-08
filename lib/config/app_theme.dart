@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// 🎨 ثيم التطبيق - نظام ألوان VisCend Studio
 class AppTheme {
@@ -35,6 +34,7 @@ class AppTheme {
       brightness: Brightness.light,
       primaryColor: primaryPurple,
       scaffoldBackgroundColor: Colors.white,
+      fontFamily: 'Cairo', // Set default font
       colorScheme: const ColorScheme.light(
         primary: primaryPurple,
         secondary: secondaryPurple,
@@ -56,6 +56,7 @@ class AppTheme {
       brightness: Brightness.dark,
       primaryColor: primaryPurple,
       scaffoldBackgroundColor: darkBackground,
+      fontFamily: 'Cairo', // Set default font
       colorScheme: const ColorScheme.dark(
         primary: primaryPurple,
         secondary: secondaryPurple,
@@ -68,7 +69,7 @@ class AppTheme {
         elevation: 0,
         iconTheme: IconThemeData(color: textPrimary),
       ),
-      cardTheme: const CardTheme(
+      cardTheme: const CardThemeData(
         color: cardBackground,
         elevation: 8,
         shape: RoundedRectangleBorder(
@@ -104,68 +105,84 @@ class AppTheme {
   
   // Text Theme
   static TextTheme _textTheme(Color color) {
+    const String cairo = 'Cairo';
+    const String tajawal = 'Tajawal';
+
     return TextTheme(
-      displayLarge: GoogleFonts.cairo(
+      displayLarge: TextStyle(
+        fontFamily: cairo,
         fontSize: 57,
         fontWeight: FontWeight.bold,
         color: color,
       ),
-      displayMedium: GoogleFonts.cairo(
+      displayMedium: TextStyle(
+        fontFamily: cairo,
         fontSize: 45,
         fontWeight: FontWeight.bold,
         color: color,
       ),
-      displaySmall: GoogleFonts.cairo(
+      displaySmall: TextStyle(
+        fontFamily: cairo,
         fontSize: 36,
         fontWeight: FontWeight.bold,
         color: color,
       ),
-      headlineLarge: GoogleFonts.cairo(
+      headlineLarge: TextStyle(
+        fontFamily: cairo,
         fontSize: 32,
         fontWeight: FontWeight.bold,
         color: color,
       ),
-      headlineMedium: GoogleFonts.cairo(
+      headlineMedium: TextStyle(
+        fontFamily: cairo,
         fontSize: 28,
         fontWeight: FontWeight.bold,
         color: color,
       ),
-      headlineSmall: GoogleFonts.cairo(
+      headlineSmall: TextStyle(
+        fontFamily: cairo,
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: color,
       ),
-      titleLarge: GoogleFonts.tajawal(
+      titleLarge: TextStyle(
+        fontFamily: tajawal,
         fontSize: 22,
         fontWeight: FontWeight.w600,
         color: color,
       ),
-      titleMedium: GoogleFonts.tajawal(
+      titleMedium: TextStyle(
+        fontFamily: tajawal,
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: color,
       ),
-      titleSmall: GoogleFonts.tajawal(
+      titleSmall: TextStyle(
+        fontFamily: tajawal,
         fontSize: 16,
         fontWeight: FontWeight.w600,
         color: color,
       ),
-      bodyLarge: GoogleFonts.tajawal(
+      bodyLarge: TextStyle(
+        fontFamily: tajawal,
         fontSize: 16,
         fontWeight: FontWeight.normal,
         color: color,
       ),
-      bodyMedium: GoogleFonts.tajawal(
+      bodyMedium: TextStyle(
+        fontFamily: tajawal,
         fontSize: 14,
         fontWeight: FontWeight.normal,
         color: color,
       ),
-      bodySmall: GoogleFonts.tajawal(
+      bodySmall: TextStyle(
+        fontFamily: tajawal,
         fontSize: 12,
         fontWeight: FontWeight.normal,
         color: color,
       ),
-      labelLarge: GoogleFonts.tajawal(
+      labelLarge: TextStyle(
+        fontFamily: tajawal,
         fontSize: 14,
         fontWeight: FontWeight.w600,
         color: color,

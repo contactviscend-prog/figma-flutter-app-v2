@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Fig Flut Vis"
+rootProject.name = "FigFluVisV3"
 include(":app")
  

@@ -116,6 +116,17 @@ class Responsive {
       return baseSize * 1.4;
     }
   }
+
+  /// Horizontal Padding متجاوب
+  static double horizontalPadding(BuildContext context) {
+    if (isMobile(context)) {
+      return 20.0;
+    } else if (isTablet(context)) {
+      return 32.0;
+    } else {
+      return 48.0;
+    }
+  }
 }
 
 /// Extension على BuildContext للوصول السريع

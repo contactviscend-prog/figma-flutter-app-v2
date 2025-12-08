@@ -5,6 +5,8 @@ import '../screens/about_screen.dart';
 import '../screens/services_screen.dart';
 import '../screens/portfolio_screen.dart';
 import '../screens/contact_screen.dart';
+import '../screens/contact_screen_v3.dart';
+import '../screens/features_screen.dart';
 
 /// 🧭 نظام التنقل في التطبيق
 class AppRouter {
@@ -14,6 +16,8 @@ class AppRouter {
   static const String services = '/services';
   static const String portfolio = '/portfolio';
   static const String contact = '/contact';
+  static const String contactV3 = '/contact-v3';
+  static const String features = '/features';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -34,6 +38,12 @@ class AppRouter {
       
       case contact:
         return _buildRoute(const ContactScreen());
+      
+      case contactV3:
+        return _buildRoute(const ContactScreenV3());
+      
+      case features:
+        return _buildRoute(const FeaturesScreen());
       
       default:
         return _buildRoute(
