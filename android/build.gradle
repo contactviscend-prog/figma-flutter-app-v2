@@ -34,19 +34,19 @@ tasks.register("clean", Delete) {
 }
 
 gradle.afterProject { project ->
-    project.plugins.withId("com.android.library") {
+    project.plugins.withId("com.android.application") {
         if (project.hasProperty("android")) {
             try {
                 project.android.applicationVariants?.all { variant ->
-                    variant.outputs?.each { output ->
-                        output.outputFileName = "${variant.name}.apk"
+                    variant.outputs?.all { output ->
+                        if (output.outputFile != null) {
+                            output.outputFileName = "${variant.name}.apk"
+                        }
                     }
                 }
             } catch (ignored) {
-                println("Skipped legacy outputFile handling for ${project.name}")
+                println("Warning: Could not configure outputFileName for ${project.name}")
             }
         }
     }
 }
-
-
